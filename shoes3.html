@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+     body {
+      background-image: url("https://wallpaperboat.com/wp-content/uploads/2020/11/10/60057/shopping-07.jpg");
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            font-family: "Lato", sans-serif;
+        }
+        .image {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 75px;
+            height: 75px;
+            border-radius: 7px;
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: rgba(75, 0, 130, 0.9); 
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            z-index: 999;
+            transform: translateX(-250px); 
+        }
+        .sidebar a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #f1f1f1;
+            display: block;
+            transition: 0.3s;
+        }
+        .sidebar a:hover {
+            color: #ffd700; 
+        }
+        .sidebar .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+        .sidebar .logout {
+            position: absolute;
+            bottom: 100px;
+            font-size: 25px;
+            color: #f1f1f1;
+        }
+        .sidebar .logout:hover {
+            color: #ffd700;
+        }
+
+    .image-container {
+      width: 100%;
+      max-width: 400px;
+      margin: auto;
+      text-align: center; 
+    }
+    .image-container img {
+      width: 80%;
+      height: auto;
+    }
+    .description {
+      width: 60%; 
+      margin: 20px auto 0; 
+      font-size: 16px;
+      text-align: center; 
+    }
+    .button-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .button-container .btn {
+      margin-right: 10px;
+    }
+    .button-container .btn:last-child {
+      margin-right: 0;
+    }
+  </style>
+</head>
+<body>
+    <img class="image" src="logo-image.png" alt="Bucket Budget Logo">
+    <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+    </svg>
+    
+    <div id="sidebar" class="sidebar">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">&times;</a>
+      <a href="http://127.0.0.1:5500/Budget-Marketing.html">Home</a>
+      <a href="http://127.0.0.1:5500/profile%20page.html">Profile</a>
+      <a href="http://127.0.0.1:5500/add-to-cart.html">Add To Cart</a>
+      <a href="http://127.0.0.1:5500/order-success.html">Your Orders</a>
+      <a href="http://127.0.0.1:5500/Login.html" class="logout">Log Out</a>
+  </div>
+
+<div class="container">
+  <div class="image-container">
+    <img src="https://i8.amplience.net/i/office/4088108757_dt2.jpg?$highres$" alt="Puma" id="productImage">
+    <div class="description">
+        <p> Puma Men's Plain Regular Shoes</p>
+        <p>Price: 1299</p>
+    </div>
+  </div>
+  <div class="button-container">
+    <button type="button" class="btn btn-warning button-left" onclick="addToCart()">Add to Cart</button>
+    <button type="button" class="btn btn-danger button-right" onclick="buyNow()">Buy Now</button>
+</div>
+</div>
+<script>
+  function openSidebar() {
+            document.getElementById("sidebar").style.transform = "translateX(0)";
+            document.getElementById("mainContainer").style.marginLeft = "250px";
+        }
+    
+        function closeSidebar() {
+            document.getElementById("sidebar").style.transform = "translateX(-250px)";
+            document.getElementById("mainContainer").style.marginLeft = "0";
+        }
+    
+        document.getElementById("menuIcon").addEventListener("click", openSidebar);
+  function addToCart() {
+      const product = {
+          imgSrc: document.getElementById('productImage').src,
+          name: "Puma Men's Plain Regular Shoes",
+          description: "Shoes",
+          price: "1299"
+      };
+
+      let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+      cartItems.push(product);
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
+      window.location.href = 'http://127.0.0.1:5500/add-to-cart.html';
+  }
+
+  function buyNow() {
+      const product = {
+        imgSrc: document.getElementById('productImage').src,
+        name: "Puma Men's Plain Regular Shoes",
+          description: "Shoes",
+          price: "1299"
+      };
+
+      let orderItems = JSON.parse(localStorage.getItem('orderItems')) || [];
+      orderItems.push(product);
+      localStorage.setItem('orderItems', JSON.stringify(orderItems));
+      window.location.href = 'http://127.0.0.1:5500/payment%20Address.html';
+    }
+</script>
+
+</body>
+</html>
